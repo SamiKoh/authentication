@@ -1,0 +1,27 @@
+version: '3.1'
+services:
+  app:
+    container_name: "mongo_app"
+    build: ./app
+    ports:
+      - 3000:3000
+    links:
+      - mongo:mongo
+    volumes:
+      - ./app:/usr/src/app
+  mongo:
+    image: mongo:latest
+    container_name: "mongo"
+    volumes:
+      - ./db/log:/data/log
+    ports:
+      - 27017:27017
+    command: mongod --smallfiles --logpath=/data/log/mongo.log
+  monitor:
+    image: mongo-express:latest
+    links: 
+      - mongo:mongo
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+    ports:
+      - 8081:8081

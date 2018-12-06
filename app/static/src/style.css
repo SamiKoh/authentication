@@ -1,0 +1,147 @@
+
+.right{
+    top: 0;
+    left: 100%;
+}
+.left{
+    top: 0;
+    right: 100%;
+}
+.top{
+    bottom: 100%;
+    left: 0;
+}
+.bottom{
+    top: 100%;
+    left: 0;
+}
+
+* {
+    box-sizing: border-box;
+  }
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    border: 1px solid #ddd;
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block;
+    position: relative;
+  }
+  
+  /* Add a light grey background color on hover */
+  ul li:hover {
+    background-color: #eee;
+  }
+  
+  /* Style the close button (span) */
+  .remove {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    padding: 12px 16px;
+    transform: translate(0%, -50%);
+  }
+  
+  .remove:hover {background: #bbb;}
+
+  input {
+      margin-bottom: 5em;
+      margin-top: 2em;
+  }
+
+  body {
+      margin-left: 3em;
+      margin-right: 3em;
+  }
+
+  ul {
+      max-width: 300px;
+  }
+
+  .dot-pulse {
+    position: relative;
+    left: -9999px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #9880ff;
+    color: #9880ff;
+    box-shadow: 9999px 0 0 -5px #9880ff;
+    animation: dotPulse 1.5s infinite linear;
+    animation-delay: .25s;
+    margin-bottom: 2em;
+    margin-left: 7em;
+  }
+  
+  .dot-pulse::before, .dot-pulse::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #9880ff;
+    color: #9880ff;
+  }
+  
+  .dot-pulse::before {
+    box-shadow: 9984px 0 0 -5px #9880ff;
+    animation: dotPulseBefore 1.5s infinite linear;
+    animation-delay: 0s;
+  }
+  
+  .dot-pulse::after {
+    box-shadow: 10014px 0 0 -5px #9880ff;
+    animation: dotPulseAfter 1.5s infinite linear;
+    animation-delay: .5s;
+  }
+  
+  @keyframes dotPulseBefore {
+    0% {
+      box-shadow: 9984px 0 0 -5px #9880ff;
+    }
+    30% {
+      box-shadow: 9984px 0 0 2px #9880ff;
+    }
+    60%,
+    100% {
+      box-shadow: 9984px 0 0 -5px #9880ff;
+    }
+  }
+  
+  @keyframes dotPulse {
+    0% {
+      box-shadow: 9999px 0 0 -5px #9880ff;
+    }
+    30% {
+      box-shadow: 9999px 0 0 2px #9880ff;
+    }
+    60%,
+    100% {
+      box-shadow: 9999px 0 0 -5px #9880ff;
+    }
+  }
+  
+  @keyframes dotPulseAfter {
+    0% {
+      box-shadow: 10014px 0 0 -5px #9880ff;
+    }
+    30% {
+      box-shadow: 10014px 0 0 2px #9880ff;
+    }
+    60%,
+    100% {
+      box-shadow: 10014px 0 0 -5px #9880ff;
+    }
+  }

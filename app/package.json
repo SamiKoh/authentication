@@ -1,0 +1,19 @@
+{
+  "name": "mongoapp",
+  "version": "1.0.0",
+  "description": "Mongo DB example",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
+  },
+  "author": "Sami Kohvakka",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.13",
+    "passport": "^0.4.0"
+  }
+}

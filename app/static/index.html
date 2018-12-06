@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="src/style.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    
+
+    <div id="app">
+        
+        <label for="item_input">Nimi
+            <input id="item_input" type="text" v-model="text"> 
+        </label>
+        <button v-on:click="add">Lisää</button>
+        <div class="dot-pulse" v-if="loading"></div>
+
+        <ul id="items">
+            <li v-for="item in items">
+                {{ item.name}} <span style="display:none;">{{ item._id }}</span><button class="remove" @click="remove(event)">x</button>
+            </li>
+        </ul>
+
+        <!-- onclick="remove(event);" -->
+    </div>
+
+    <script src="src/app.js"></script>
+</body>
+</html>
