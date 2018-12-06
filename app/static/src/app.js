@@ -1,15 +1,23 @@
 const url = 'http://127.0.0.1:3000/api/item';
- 
+
+
+
+
 const app = new Vue({
     el: '#app',
     data () {
         return {
             items: [ {name: "Tomaatti"}, {name: "Kurkku"} ],
             loading: true,
-            text: ''
+            text: '',
+            ok: false
         }
     },
     created () {
+
+        if (localStorage)
+
+
         this.$on('click', (event) => {
             console.log('click event', event);
             this.get()

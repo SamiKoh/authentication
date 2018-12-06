@@ -9,25 +9,30 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 </head>
 <body>
     
 
     <div id="app">
         
-        <label for="item_input">Nimi
-            <input id="item_input" type="text" v-model="text"> 
-        </label>
-        <button v-on:click="add">Lisää</button>
-        <div class="dot-pulse" v-if="loading"></div>
+        <div id="main" v-if="ok">
+            <label for="item_input">Nimi
+                <input id="item_input" type="text" v-model="text"> 
+            </label>
+            <button v-on:click="add">Lisää</button>
+            <div class="dot-pulse" v-if="loading"></div>
+            
+            <ul id="items">
+                <li v-for="item in items">
+                    {{ item.name}} <span style="display:none;">{{ item._id }}</span><button class="remove" @click="remove(event)">x</button>
+                </li>
+            </ul>
+        </div>
+        <div id="login" v-else > 
 
-        <ul id="items">
-            <li v-for="item in items">
-                {{ item.name}} <span style="display:none;">{{ item._id }}</span><button class="remove" @click="remove(event)">x</button>
-            </li>
-        </ul>
 
-        <!-- onclick="remove(event);" -->
+        </div>
     </div>
 
     <script src="src/app.js"></script>
