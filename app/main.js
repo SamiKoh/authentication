@@ -18,7 +18,7 @@ app.use(express.static('static'));
 /* enable cors */
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, DELETE");
     next();
 });
@@ -37,7 +37,7 @@ const itemSchema = new Schema({
 
 // User schema
 const UserSchema = new Schema({
-    email: String,
+    email: {type: String, unique: true, required: true},
     hash: String,
     salt: String,
 });
@@ -81,7 +81,7 @@ require('./passport');
 
 
 /* Endpoints */
-app.get('/api/item', (req, res) => {
+app.get('/api/item', auth.required, (req, res) => {
     
     console.log("get request arrived:");
     
@@ -92,7 +92,7 @@ app.get('/api/item', (req, res) => {
     
 });
 
-app.post('/api/item', (req, res) => {
+app.post('/api/item', auth.required, (req, res) => {
     /* res.send('Posting to Item list...') */
     //let item = new Item(req.body);
     
@@ -109,7 +109,7 @@ app.post('/api/item', (req, res) => {
 });
 
 
-app.delete('/api/item', (req, res) => {
+app.delete('/api/item', auth.required, (req, res) => {
     console.log('Delete request received: ', req.body);
     Item.deleteOne({_id: req.body._id}, err => {
         if (err) console.log(err);
@@ -151,6 +151,7 @@ app.post('/api/register', auth.optional, (req, res, next) => {
 // login
 app.post('/api/login', auth.optional, (req, res, next) => {
     const { body: { user } } = req;
+    console.log(req.body);
     
     if(!user.email) {
         return res.status(422).json({
@@ -170,6 +171,7 @@ app.post('/api/login', auth.optional, (req, res, next) => {
     
     return passport.authenticate('local', { session: false }, (err, passportUser, info) => {
         if(err) {
+            console.log("Login error", err);
             return next(err);
         }
         
@@ -179,23 +181,10 @@ app.post('/api/login', auth.optional, (req, res, next) => {
             
             return res.json({ user: user.toAuthJSON() });
         }
-        
-        return status(400).info;
+        console.log("password not found");
+        res.send(401);
+        return res.status(400);
     })(req, res, next);
-});
-
-//GET current route (required, only authenticated users have access)
-app.get('/api/current', auth.required, (req, res, next) => {
-    const { payload: { id } } = req;
-    
-    return User.findById(id)
-    .then((user) => {
-        if(!user) {
-            return res.sendStatus(400);
-        }
-        
-        return res.json({ user: user.toAuthJSON() });
-    });
 });
 
 

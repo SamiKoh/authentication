@@ -16,11 +16,12 @@
 
     <div id="app">
         
-        <div id="main" v-if="ok">
-            <label for="item_input">Nimi
+        <div id="main" v-if="!login">
+            <label for="item_input">Item
                 <input id="item_input" type="text" v-model="text"> 
             </label>
-            <button v-on:click="add">Lisää</button>
+            <button v-on:click="add">Add</button>
+            <button v-on:click.prevent="logout">Logout</button>
             <div class="dot-pulse" v-if="loading"></div>
             
             <ul id="items">
@@ -31,7 +32,22 @@
         </div>
         <div id="login" v-else > 
 
-
+            <div id="register" v-if="register">
+                <h2>Register as a new user</h2>
+                <button @click.prevent="sendRegistration">Send</button>
+                <button @click.prevent="register=false;">Cancel</button>
+            </div>
+            <div v-else>
+                <h2>Login</h2>    
+                <button @click.prevent="sendLogin">Login</button>
+                <button @click.prevent="register=true;">Register</button>
+            </div>
+            <label for="email">email</label>
+            <input id="email" type="email" v-model="user.email">
+            <label for="pwd">password</label>
+            <input id="pwd" type="password" v-model="user.pwd">
+            
+            
         </div>
     </div>
 

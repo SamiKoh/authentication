@@ -5,7 +5,7 @@ const jsonwebtoken = require('jsonwebtoken');
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
-  email: String,
+  email: {type: String, unique: true, required: true},
   hash: String,
   salt: String,
 });
